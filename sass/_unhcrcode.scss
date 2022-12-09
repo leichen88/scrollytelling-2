@@ -1,0 +1,14 @@
+// Wrap code
+pre > code.sourceCode {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+}
+
+pre.sourceCode {
+    
+    max-height: 30rem;
+}
+div.sourceCode{
+  padding: 1rem;
+  background-color: $gray-100;
+}

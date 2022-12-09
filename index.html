@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNHCR Dataviz Platform - Aim of better data storytelling</title>
+    <meta name="description"
+        content="UNHCR Data Visualization platform is one-stop-shop of insights, guidelines, and tools for creating brand-compliant data visualization and improving Data Storytelling.">
+    <meta name="keywords"
+        content="Data,Data viz,Data visualization,Plot,Chart,Graphic,Infographic,Best practices,Templates,Tutorials,Data visualization guidelines,Data visualization tools,Microsoft chart template,Power BI,Illustrator,R,ggplot 2,Python,Matplotlib,D3js,Data storytelling">
+    <meta name="author" content="Cedric Vidonne">
+    <meta name="author" content="Lei Chen">
+    <link href="assets/css/unhcrmain.min.css" rel="stylesheet" />
+	  <script src="assets/js/vendor/jquery.min.js"></script>
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    
+    
+    <style>
+
+    /* Small devices (tablets, 768px and up) */
+    /* @media (min-width: @screen-sm-min) { ... } */
+
+    /* Medium devices (desktops, 992px and up) */
+    /* @media (min-width: @screen-md-min) { ... } */
+
+    /* Large devices (large desktops, 1200px and up) */
+    /* @media (min-width: @screen-lg-min) { ... } */
+
+    /* #scrolly__section {
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      padding: 1rem;
+    }
+
+    #scrolly__section > * {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+    }
+
+    .scrolly__content {
+      position: relative;
+      padding: 0 1rem;
+      width: 100%;
+    }
+
+    .scrolly__chart {
+      position: -webkit-sticky;
+      position: sticky;
+      width: 100%;
+      margin: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      z-index: 0;
+    }
+
+    .scrolly__chart iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    .step {
+      margin: 0 auto 2rem auto;
+      display: flex;
+      justify-content: center;
+      align-items: start;      
+    }
+
+    .step:last-child {
+      margin-bottom: 0;
+    }
+
+    .text-block.is-active {
+      background-color: #E0E9FE;
+      color: #333333;
+    }
+
+    .text-block {
+      background-color: #f3f3f3;
+    }
+
+    .step p {
+      text-align: left;
+      padding: 1rem;
+    }
+
+    iframe {
+      border: unset;
+    } */
+
+
+
+
+
+
+ 
+
+    .scrolly_overlay {
+	  position: relative;
+	}
+ 
+    #landing .scrolly_sticky {
+      height: 0;
+    }
+	
+
+    .scrolly_overlay .scrolly_sticky {
+      position: -webkit-sticky;
+	  position: sticky;
+	  left: 0;
+	  width: 100%;
+	  margin: 0;
+	  -webkit-transform: translate3d(0, 0, 0);
+	  -moz-transform: translate3d(0, 0, 0);
+	  transform: translate3d(0, 0, 0);
+	  top: 64px;
+      transform: translateZ(0);
+	  z-index: 0;
+    }
+
+    .scrolly_overlay .scrolly_text {
+	  position: relative;
+	  padding: 0;
+	  max-width: 60rem;
+	  margin: 0 auto;
+	}
+
+	.step {
+      text-align: center;
+	  margin: 0 auto 2rem auto;
+      height: calc(100vh - 64px)
+	}
+
+	.step:last-child {
+	   margin-bottom: 0;
+	}
+
+    .step h1 {
+      font-size: 4em;
+      color: #fff;
+    }
+	
+	.step p {
+      color: #fff;
+	  padding: 1rem;
+	}
+
+    .step h4 {
+      color: #fff; 
+    }
+
+    video {
+      position: fixed;
+      min-width: 100%;
+      min-height: 100%;
+    }
+
+    .video_cover {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.6);
+      width: 100%;
+    }
+
+/* mapbox style */
+
+a, a:hover, a:visited {
+            color: #0071bc;
+        }
+        #map {
+            top:0;
+            height: 100vh;
+            width:100vw;
+            position: sticky;
+        }
+        /* #mapInset {
+            bottom:50px;
+            right:30px;
+            height: 180px;
+            width:250px;
+            max-width:100%;
+            position: fixed;
+            z-index: 1;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+        #mapInset .mapboxgl-ctrl-bottom-left{
+            display: none;
+        }
+        @media (max-width: 500px) {
+            #mapInset {
+                display: none;
+            }
+        } */
+
+        #features {
+            padding-top: 10vh;
+            padding-bottom: 10vh;
+        }
+        .hidden {
+            visibility: hidden;
+        }
+        .centered {
+            width: 50vw;
+            margin: 0 auto;
+        }
+        .lefty {
+            width: 33vw;
+            margin-left: 5vw;
+        }
+        .righty {
+            width: 33vw;
+            margin-left: 62vw;
+        }
+        .fully {
+            width: 100%;
+            margin: auto;
+        }
+        .light {
+            color: #444;
+            background-color: #fafafa;
+        }
+        .dark {
+            color: #fafafa;
+            background-color: #444;
+        }
+        .step {
+            padding-bottom: 50vh;
+            /* margin-bottom: 10vh; */
+            opacity: 0.25;
+        }
+        .step.active {
+            opacity: 0.9;
+        }
+
+        .step div {
+            padding:  25px 50px;
+            line-height: 25px;
+            font-size: 13px;
+        }
+
+        .step img {
+            width: 100%;
+        }
+
+        @media (max-width: 750px) {
+            .centered, .lefty, .righty, .fully {
+                width: 90vw;
+                margin: 0 auto;
+            }
+        }
+
+        /* Fix issue on mobile browser where scroll breaks  */
+        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan,
+        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas {
+            touch-action: unset;
+        }
+
+
+
+
+
+
+
+    </style> 
+
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://public.flourish.studio/resources/embed.js"></script>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<hcr-header></hcr-header>
+<!-- End Navigation -->
+
+<!-- Main -->
+<main id="products">
+  <div class="content_wrap">
+    <div class="story_wrapper">
+      <section id="landing" class="scrolly_overlay">
+        <div class="scrolly_sticky">
+          <div class="video_wrapper">
+            <video class="justify-content-center" preload="none", autoplay="autoplay", loop="loop", muted="muted">
+              <source src="assets/img/Intro.mp4" type="video/mp4"></source>
+            </video>
+            <div class="video_cover"></div>
+          </div>
+        </div>
+        <div class="scrolly_text container py-0 inner">
+          <div class="step" data-step="1" data-scrollama-index="0">
+            <div>
+              <h1>COVID-19 deepens threats for displaced women and children</h1>
+              <h4>The pandemic has aggravated many of the factors that put forcibly displaced women and children at greater risk of violence and abuse</h4>
+              <p>UNHCR, The UN Refugee Agency</p>
+            </div>
+          </div>
+          <div class="step" data-step="2" data-scrollama-index="1">
+            <div>
+              <h4>Displaced women and children under threat</h4>
+              <h4>For millions of displaced people the COVID-19 crisis has made life harder in myriad ways from restricting their  access to asylum , to  taking away their livelihoods  and confining them to cramped rooms or  densely populated camps . For displaced women and children, the worsening socio-economic conditions, lockdowns and school closures have brought further threats.</h4>
+            </div>
+          </div>
+          <div class="step" data-step="3" data-scrollama-index="2">
+            <div>
+              <h4>Within months of the outbreak, reports suggested that violence against women and children had intensified. Containment measures were trapping women and children with their abusers and cutting them off from support systems. The heightened risk of violence was even more pronounced among displaced women and children, who make up  70 per cent of all forcibly displaced people worldwide . </h4>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="scrolly_map" class="s">
+        <div id="map"></div>
+        <div id="mapInset"></div>
+        <div id="story"></div>
+      </section>
+
+      <section>
+        <h4>Displaced women and children under threat</h4>
+      </section>
+    </div>
+  </div>
+
+
+  <!-- <div class="container my-5"> -->
+
+  <!-- <div class="row justify-content-md-center mb-5 py-5">
+    <div class="col col-md-8">
+      <h2>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h2>
+      <p>14 February 2022</p>
+      <hr>
+      <p class="mb-4">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+        Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+      <img src="/assets/img/image1.jpg" alt="placeholder" width=100% class="mb-5"/> 
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>   
+      <p> Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>  
+      <h3 class="my-4">Subtitle here</h3>
+      <p class="mb-4">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error dolor, quos aut repellendus quia porro temporibus magni unde, rerum quasi aperiam, eligendi ducimus aliquam fugiat quas autem labore id consectetur.
+      </p>
+    </div>
+  </div> -->
+  
+  <!-- scollytelling with flourish -->
+  <!-- <div class="container-fluid" id="root">
+	<div class="row justify-content-center" id="scrolly__section">
+	  <div class="col-4 scrolly__content">
+		<div class="step" data-step="1">
+		  <div class="text-block pa-2">
+			<p class="text-body-2">lorem 1</p>
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium debitis modi labore unde commodi, dolorem ut enim, necessitatibus odit facere et pariatur minus! Aliquam rem earum tempore accusamus corporis similique.</p>
+		  </div>
+		</div>
+		<div class="step" data-step="2">
+		  <div class="text-block pa-2">
+			<p class="text-body-2">lorem 2</p>
+			<p class="text-body-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium debitis modi labore unde commodi, dolorem ut enim, necessitatibus odit facere et pariatur minus! Aliquam rem earum tempore accusamus corporis similique.</p>
+		  </div>            
+		</div>
+		<div class="step" data-step="3">
+		  <div class="text-block pa-2">
+			<p class="text-body-2">lorem 3</p>
+			<p class="text-body-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium debitis modi labore unde commodi, dolorem ut enim, necessitatibus odit facere et pariatur minus! Aliquam rem earum tempore accusamus corporis similique.</p>
+		  </div>            
+		</div>
+		<div class="step" data-step="4">
+		  <div class="text-block pa-2">
+			<p class="text-body-2">lorem 4</p>
+			<p class="text-body-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium debitis modi labore unde commodi, dolorem ut enim, necessitatibus odit facere et pariatur minus! Aliquam rem earum tempore accusamus corporis similique.</p>
+		  </div>            
+		</div>
+	  </div>
+
+	  <div class="col-6 scrolly__chart">
+    <iframe scrolling="no" src='https://flo.uri.sh/story/1768191/embed#slide-0'></iframe>
+	  </div>
+	</div>        
+  </div> -->
+  <!-- end scollytelling with flourish -->
+
+
+  <!-- <div class="row justify-content-md-center">
+    <div class="col col-md-8">
+      <p class="mb-4 mt-5">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+        Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+	  <p class="mb-4">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+	  	Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+	  <p class="mb-5">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+	  	Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>	  
+	  </div>
+  </div> -->
+
+  <!-- </div> -->
+
+
+</main>
+<!-- End Main -->
+
+
+
+<!-- side by side -->
+<!-- <script>
+	var scrolly = d3.select("#scrolly__section");
+	var chart = scrolly.select(".scrolly__chart");
+	var content = scrolly.select(".scrolly__content");
+	var step = content.selectAll(".step");
+  
+	// initialize the scrollama
+	var scroller = scrollama();
+  
+	// generic window resize listener event
+	function handleResize() {
+	  // 1. update height of step elements
+	  var stepH = Math.floor(window.innerHeight * 1);
+	  step.style("height", stepH + "px");
+  
+	  var figureHeight = window.innerHeight * 0.75;
+	  var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+  
+	  chart
+		.style("height", figureHeight + "px")
+		.style("top", figureMarginTop + "px");
+  
+	  // 3. tell scrollama to update new element dimensions
+	  scroller.resize();
+	}
+  
+	// scrollama event handlers
+	function handleStepEnter(response) {
+	  const textblock = step.select(".text-block");
+
+	  // add color to current step only
+	  textblock.classed("is-active", function(d, i) {
+		return i === response.index;
+	  });
+  
+	  // update graphic based on step
+	  const linkHead = 'https://flo.uri.sh/story/1768191/embed#slide-'
+	  const slide = response.index
+
+	  d3.select('.scrolly__chart iframe')
+		.attr('src', linkHead + slide);
+	}
+  
+	function setupStickyfill() {
+	  d3.selectAll(".sticky").each(function() {
+		Stickyfill.add(this);
+	  });
+	}
+  
+	function init() {
+	  setupStickyfill();
+	  handleResize();
+	  scroller
+		.setup({
+		  step: "#scrolly__section .scrolly__content .step",
+		  offset: 0.7,
+		  debug: false
+		})
+		.onStepEnter(handleStepEnter);
+  
+	  // setup resize event
+	  window.addEventListener("resize", handleResize);
+	}
+  
+	init();
+  </script> -->
+
+
+
+  <script src="assets/js/vendor/config.js"></script>
+  <script>
+    var initLoad = true;
+    var layerTypes = {
+        'fill': ['fill-opacity'],
+        'line': ['line-opacity'],
+        'circle': ['circle-opacity', 'circle-stroke-opacity'],
+        'symbol': ['icon-opacity', 'text-opacity'],
+        'raster': ['raster-opacity'],
+        'fill-extrusion': ['fill-extrusion-opacity'],
+        'heatmap': ['heatmap-opacity']
+    }
+    
+    var alignments = {
+        'left': 'lefty',
+        'center': 'centered',
+        'right': 'righty',
+        'full': 'fully'
+    }
+    
+    function getLayerPaintType(layer) {
+        var layerType = map.getLayer(layer).type;
+        return layerTypes[layerType];
+    }
+    
+    function setLayerOpacity(layer) {
+        var paintProps = getLayerPaintType(layer.layer);
+        paintProps.forEach(function(prop) {
+            var options = {};
+            if (layer.duration) {
+                var transitionProp = prop + "-transition";
+                options = { "duration": layer.duration };
+                map.setPaintProperty(layer.layer, transitionProp, options);
+            }
+            map.setPaintProperty(layer.layer, prop, layer.opacity, options);
+        });
+    }
+    
+    var story = document.getElementById('story');
+    var features = document.createElement('div');
+    features.setAttribute('id', 'features');
+    
+    var header = document.createElement('div');
+    
+    if (config.title) {
+        var titleText = document.createElement('h1');
+        titleText.innerText = config.title;
+        header.appendChild(titleText);
+    }
+    
+    if (config.subtitle) {
+        var subtitleText = document.createElement('h2');
+        subtitleText.innerText = config.subtitle;
+        header.appendChild(subtitleText);
+    }
+    
+    if (config.byline) {
+        var bylineText = document.createElement('p');
+        bylineText.innerText = config.byline;
+        header.appendChild(bylineText);
+    }
+    
+    if (header.innerText.length > 0) {
+        header.classList.add(config.theme);
+        header.setAttribute('id', 'header');
+        story.appendChild(header);
+    }
+    
+    config.chapters.forEach((record, idx) => {
+        var container = document.createElement('div');
+        var chapter = document.createElement('div');
+    
+        if (record.title) {
+            var title = document.createElement('h3');
+            title.innerText = record.title;
+            chapter.appendChild(title);
+        }
+    
+        if (record.image) {
+            var image = new Image();
+            image.src = record.image;
+            chapter.appendChild(image);
+        }
+    
+        if (record.description) {
+            var story = document.createElement('p');
+            story.innerHTML = record.description;
+            chapter.appendChild(story);
+        }
+    
+        container.setAttribute('id', record.id);
+        container.classList.add('step');
+        if (idx === 0) {
+            container.classList.add('active');
+        }
+    
+        chapter.classList.add(config.theme);
+        container.appendChild(chapter);
+        container.classList.add(alignments[record.alignment] || 'centered');
+        if (record.hidden) {
+            container.classList.add('hidden');
+        }
+        features.appendChild(container);
+    });
+    
+    story.appendChild(features);
+    
+    var footer = document.createElement('div');
+    
+    if (config.footer) {
+        var footerText = document.createElement('p');
+        footerText.innerHTML = config.footer;
+        footer.appendChild(footerText);
+    }
+    
+    if (footer.innerText.length > 0) {
+        footer.classList.add(config.theme);
+        footer.setAttribute('id', 'footer');
+        story.appendChild(footer);
+    }
+    
+    mapboxgl.accessToken = config.accessToken;
+    
+    const transformRequest = (url) => {
+        const hasQuery = url.indexOf("?") !== -1;
+        const suffix = hasQuery ? "&pluginName=scrollytellingV2" : "?pluginName=scrollytellingV2";
+        return {
+          url: url + suffix
+        }
+    }
+    
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: config.style,
+        center: config.chapters[0].location.center,
+        zoom: config.chapters[0].location.zoom,
+        bearing: config.chapters[0].location.bearing,
+        pitch: config.chapters[0].location.pitch,
+        interactive: false,
+        transformRequest: transformRequest,
+        projection: config.projection
+    });
+    
+    // Create a inset map if enabled in config.js
+    if (config.inset) {
+     var insetMap = new mapboxgl.Map({
+        container: 'mapInset', // container id
+        style: 'mapbox://styles/mapbox/dark-v10', //hosted style id
+        center: config.chapters[0].location.center,
+        // Hardcode above center value if you want insetMap to be static.
+        zoom: 3, // starting zoom
+        hash: false,
+        interactive: false,
+        attributionControl: false,
+        //Future: Once official mapbox-gl-js has globe view enabled,
+        //insetmap can be a globe with the following parameter.
+        //projection: 'globe'
+      });
+    }
+    
+    if (config.showMarkers) {
+        var marker = new mapboxgl.Marker({ color: config.markerColor });
+        marker.setLngLat(config.chapters[0].location.center).addTo(map);
+    }
+    
+    // instantiate the scrollama
+    var scroller = scrollama();
+    
+    
+    map.on("load", function() {
+        if (config.use3dTerrain) {
+            map.addSource('mapbox-dem', {
+                'type': 'raster-dem',
+                'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+                'tileSize': 512,
+                'maxzoom': 14
+            });
+            // add the DEM source as a terrain layer with exaggerated height
+            map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+    
+            // add a sky layer that will show when the map is highly pitched
+            map.addLayer({
+                'id': 'sky',
+                'type': 'sky',
+                'paint': {
+                    'sky-type': 'atmosphere',
+                    'sky-atmosphere-sun': [0.0, 0.0],
+                    'sky-atmosphere-sun-intensity': 15
+                }
+            });
+        };
+    
+        // As the map moves, grab and update bounds in inset map.
+        if (config.inset) {
+        map.on('move', getInsetBounds);
+        }
+        // setup the instance, pass callback functions
+        scroller
+        .setup({
+            step: '.step',
+            offset: 0.5,
+            progress: true
+        })
+        .onStepEnter(async response => {
+            var current_chapter = config.chapters.findIndex(chap => chap.id === response.element.id);
+            var chapter = config.chapters[current_chapter];
+            
+            response.element.classList.add('active');
+            map[chapter.mapAnimation || 'flyTo'](chapter.location);
+    
+            // Incase you do not want to have a dynamic inset map,
+            // rather want to keep it a static view but still change the
+            // bbox as main map move: comment out the below if section.
+            if (config.inset) {
+              if (chapter.location.zoom < 5) {
+                insetMap.flyTo({center: chapter.location.center, zoom: 0});
+              }
+              else {
+                insetMap.flyTo({center: chapter.location.center, zoom: 3});
+              }
+            }
+            if (config.showMarkers) {
+                marker.setLngLat(chapter.location.center);
+            }
+            if (chapter.onChapterEnter.length > 0) {
+                chapter.onChapterEnter.forEach(setLayerOpacity);
+            }
+            if (chapter.callback) {
+                window[chapter.callback]();
+            }
+            if (chapter.rotateAnimation) {
+                map.once('moveend', () => {
+                    const rotateNumber = map.getBearing();
+                    map.rotateTo(rotateNumber + 180, {
+                        duration: 30000, easing: function (t) {
+                            return t;
+                        }
+                    });
+                });
+            }
+            if (config.auto) {
+                 var next_chapter = (current_chapter + 1) % config.chapters.length;
+                 map.once('moveend', () => {
+                     document.querySelectorAll('[data-scrollama-index="' + next_chapter.toString() + '"]')[0].scrollIntoView();
+                 });
+            }
+        })
+        .onStepExit(response => {
+            var chapter = config.chapters.find(chap => chap.id === response.element.id);
+            response.element.classList.remove('active');
+            if (chapter.onChapterExit.length > 0) {
+                chapter.onChapterExit.forEach(setLayerOpacity);
+            }
+        });
+    
+    
+        if (config.auto) {
+            document.querySelectorAll('[data-scrollama-index="0"]')[0].scrollIntoView();
+        }
+    });
+    
+    //Helper functions for insetmap
+    function getInsetBounds() {
+                let bounds = map.getBounds();
+    
+                let boundsJson = {
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "properties": {},
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [
+                                    [
+                                        bounds._sw.lng,
+                                        bounds._sw.lat
+                                    ],
+                                    [
+                                        bounds._ne.lng,
+                                        bounds._sw.lat
+                                    ],
+                                    [
+                                        bounds._ne.lng,
+                                        bounds._ne.lat
+                                    ],
+                                    [
+                                        bounds._sw.lng,
+                                        bounds._ne.lat
+                                    ],
+                                    [
+                                        bounds._sw.lng,
+                                        bounds._sw.lat
+                                    ]
+                                ]
+                            ]
+                        }
+                    }]
+                }
+    
+                if (initLoad) {
+                    addInsetLayer(boundsJson);
+                    initLoad = false;
+                } else {
+                    updateInsetLayer(boundsJson);
+                }
+    
+            }
+    
+    function addInsetLayer(bounds) {
+        insetMap.addSource('boundsSource', {
+            'type': 'geojson',
+            'data': bounds
+        });
+    
+        insetMap.addLayer({
+            'id': 'boundsLayer',
+            'type': 'fill',
+            'source': 'boundsSource', // reference the data source
+            'layout': {},
+            'paint': {
+                'fill-color': '#fff', // blue color fill
+                'fill-opacity': 0.2
+            }
+        });
+        // // Add a black outline around the polygon.
+        insetMap.addLayer({
+            'id': 'outlineLayer',
+            'type': 'line',
+            'source': 'boundsSource',
+            'layout': {},
+            'paint': {
+                'line-color': '#000',
+                'line-width': 1
+            }
+        });
+    }
+    
+    function updateInsetLayer(bounds) {
+        insetMap.getSource('boundsSource').setData(bounds);
+    }
+    
+    
+    
+    // setup resize event
+    window.addEventListener('resize', scroller.resize);
+    
+    </script>
+
+
+
+
+
+
+
+
+
+  <script>
+		// using d3 for convenience
+		var main = d3.select("main");
+		var scrolly = main.select(".scrolly_overlay");
+		var figure = scrolly.select(".scrolly_sticky");
+		var article = scrolly.select(".scrolly_text");
+		var step = article.selectAll(".step");
+
+		// initialize the scrollama
+		var scroller = scrollama();
+
+		// generic window resize listener event
+		function handleResize() {
+			// 1. update height of step elements
+			var stepH = Math.floor(window.innerHeight);
+			step.style("height", stepH + "px");
+
+			var figureHeight = window.innerHeight;
+			var figureMarginTop = (window.innerHeight - figureHeight);
+
+			figure
+				.style("height", figureHeight + "px")
+				.style("top", figureMarginTop + "px");
+
+			// 3. tell scrollama to update new element dimensions
+			scroller.resize();
+		}
+
+		// scrollama event handlers
+		function handleStepEnter(response) {
+			console.log(response);
+			// response = { element, direction, index }
+
+			// add color to current step only
+			step.classed("is-active", function (d, i) {
+				return i === response.index;
+			});
+
+			// update graphic based on step
+			figure.select("p").text(response.index + 1);
+		}
+
+
+		function init() {
+
+			// 1. force a resize on load to ensure proper dimensions are sent to scrollama
+			handleResize();
+
+			// 2. setup the scroller passing options
+			// 		this will also initialize trigger observations
+			// 3. bind scrollama event handlers (this can be chained like below)
+			scroller
+				.setup({
+					step: "#scrolly_overlay .scrolly_text .step",
+					offset: 0.33,
+					debug: false
+				})
+				.onStepEnter(handleStepEnter);
+		}
+
+		// kick things off
+		init();
+	</script>
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <hcr-footer></hcr-footer>
+    <!-- End footer -->
+
+    <!-- Scripts -->
+    <!-- bs/popper bundle -->
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <!-- UNHCR includes header/footer JS file -->
+    <script type="module" src="assets/js/unhcrincludes.js"></script>
+    <!-- UNHCR main JS file -->
+    <script type="module" src="assets/js/unhcrmain.js"></script>
+    <!-- End scripts -->
+
+</body>
+
+</html>
