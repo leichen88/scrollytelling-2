@@ -1,7 +1,7 @@
 var config = {
     style: ['mapbox://styles/zjwzyjcl/cktkg0sli845w17p5gw16z9cl','mapbox://styles/zjwzyjcl/cksyl9ubw95cg17qinqporu7u'],
     accessToken: 'pk.eyJ1Ijoiemp3enlqY2wiLCJhIjoiY2xiZ2I1Z2kzMGVrODN2bnhzNXY1bHRhYSJ9.P8g6e_grpPgvTTG6buLDog',
-    showMarkers: true,
+    showMarkers: false,
     markerColor: '#3FB1CE',
     //projection: 'equirectangular',
     //Read more about available projections here
@@ -19,7 +19,7 @@ var config = {
             id: 'slug-style-id',
             alignment: 'left',
             hidden: false,
-            title: 'Display Title',
+            title: 'San Francisco',
             image: '',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             location: {
@@ -49,9 +49,9 @@ var config = {
             id: 'second-identifier',
             alignment: 'left',
             hidden: false,
-            title: 'Second Title',
+            title: 'Washington',
             image: '',
-            description: 'Copy these sections to add to your story.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             location: {
                 center: [-77.020636, 38.886900],
                 zoom: 8.5,
@@ -74,9 +74,9 @@ var config = {
             id: 'third-identifier',
             alignment: 'left',
             hidden: false,
-            title: 'Third Title',
+            title: 'Geneva',
             image: '',
-            description: 'Copy these sections to add to your story.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             location: {
                 center: [6.15116, 46.20595],
                 zoom: 12.52,
@@ -93,9 +93,9 @@ var config = {
             id: 'fourth-chapter',
             alignment: 'left',
             hidden: false,
-            title: 'Third Title',
+            title: 'Argentina',
             image: '',
-            description: 'Copy these sections to add to your story.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             location: {
                 center: [-58.54195, -34.71600],
                 zoom: 4,
@@ -114,7 +114,7 @@ var config = {
             id: 'a',
             alignment: 'center',
             hidden: false,
-            title: 'Title 1',
+            title: 'San Francisco',
             image: '',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             location: {
@@ -144,9 +144,9 @@ var config = {
             id: 'b',
             alignment: 'center',
             hidden: false,
-            title: 'Title 2',
+            title: 'Washington',
             image: '',
-            description: 'Copy these sections to add to your story.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             location: {
                 center: [-77.020636, 38.886900],
                 zoom: 8.5,
@@ -169,9 +169,9 @@ var config = {
             id: 'c',
             alignment: 'center',
             hidden: false,
-            title: 'Title 3',
+            title: 'Geneva',
             image: '',
-            description: 'Copy these sections to add to your story.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             location: {
                 center: [6.15116, 46.20595],
                 zoom: 12.52,
@@ -188,9 +188,9 @@ var config = {
             id: 'd',
             alignment: 'center',
             hidden: false,
-            title: 'Title 4',
+            title: 'Argentina',
             image: '',
-            description: 'Copy these sections to add to your story.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             location: {
                 center: [-58.54195, -34.71600],
                 zoom: 4,
