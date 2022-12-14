@@ -668,52 +668,52 @@
             // Incase you do not want to have a dynamic inset map,
             // rather want to keep it a static view but still change the
             // bbox as main map move: comment out the below if section.
-            if (config.inset) {
-              if (chapter.location.zoom < 5) {
-                insetMap.flyTo({center: chapter.location.center, zoom: 0});
-              }
-              else {
-                insetMap.flyTo({center: chapter.location.center, zoom: 3});
-              }
-            }
-            if (config.showMarkers) {
-                marker.setLngLat(chapter.location.center);
-            }
-            if (chapter.onChapterEnter.length > 0) {
-                chapter.onChapterEnter.forEach(setLayerOpacity);
-            }
-            if (chapter.callback) {
-                window[chapter.callback]();
-            }
-            if (chapter.rotateAnimation) {
-                map.once('moveend', () => {
-                    const rotateNumber = map.getBearing();
-                    map.rotateTo(rotateNumber + 180, {
-                        duration: 30000, easing: function (t) {
-                            return t;
-                        }
-                    });
-                });
-            }
-            if (config.auto) {
-                 const next_chapter = (current_chapter + 1) % config.chapters[0].length;
-                 map.once('moveend', () => {
-                     document.querySelectorAll('[data-scrollama-index="' + next_chapter.toString() + '"]')[0].scrollIntoView();
-                 });
-            }
+            // if (config.inset) {
+            //   if (chapter.location.zoom < 5) {
+            //     insetMap.flyTo({center: chapter.location.center, zoom: 0});
+            //   }
+            //   else {
+            //     insetMap.flyTo({center: chapter.location.center, zoom: 3});
+            //   }
+            // }
+            // if (config.showMarkers) {
+            //     marker.setLngLat(chapter.location.center);
+            // }
+            // if (chapter.onChapterEnter.length > 0) {
+            //     chapter.onChapterEnter.forEach(setLayerOpacity);
+            // }
+            // if (chapter.callback) {
+            //     window[chapter.callback]();
+            // }
+            // if (chapter.rotateAnimation) {
+            //     map.once('moveend', () => {
+            //         const rotateNumber = map.getBearing();
+            //         map.rotateTo(rotateNumber + 180, {
+            //             duration: 30000, easing: function (t) {
+            //                 return t;
+            //             }
+            //         });
+            //     });
+            // }
+            // if (config.auto) {
+            //      const next_chapter = (current_chapter + 1) % config.chapters[0].length;
+            //      map.once('moveend', () => {
+            //          document.querySelectorAll('[data-scrollama-index="' + next_chapter.toString() + '"]')[0].scrollIntoView();
+            //      });
+            // }
         })
-        .onStepExit(response => {
-            const chapter = config.chapters[0].find(chap => chap.id === response.element.id);
-            response.element.classList.remove('active');
-            if (chapter.onChapterExit.length > 0) {
-                chapter.onChapterExit.forEach(setLayerOpacity);
-            }
-        });
+        // .onStepExit(response => {
+        //     const chapter = config.chapters[0].find(chap => chap.id === response.element.id);
+        //     response.element.classList.remove('active');
+        //     if (chapter.onChapterExit.length > 0) {
+        //         chapter.onChapterExit.forEach(setLayerOpacity);
+        //     }
+        // });
     
     
-        if (config.auto) {
-            document.querySelectorAll('[data-scrollama-index="0"]')[0].scrollIntoView();
-        }
+        // if (config.auto) {
+        //     document.querySelectorAll('[data-scrollama-index="0"]')[0].scrollIntoView();
+        // }
     });
 
     var scroller_1 = scrollama();
