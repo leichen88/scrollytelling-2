@@ -46,16 +46,16 @@ function createLine() {
         geojsonPoint.features[0].geometry.coordinates.push([newX, newY]);
 
         // draw our initinal point
-        if (i === 0) {
-            let initPoint = turf.point([newX, newY]);
+        // if (i === 0) {
+        //     let initPoint = turf.point([newX, newY]);
 
-            // if you want to follow the point...
-            if (followPoint === true) {
-            	map.setCenter([newX, newY]);
-        	}
+        //     // if you want to follow the point...
+        //     if (followPoint === true) {
+        //     	map.setCenter([newX, newY]);
+        // 	}
 
-            map.getSource('pointSource').setData(initPoint);
-        }
+        //     map.getSource('pointSource').setData(initPoint);
+        // }
 
         // once 'i' equals the number of points then we're done building our line 
         if (i == rects) {
