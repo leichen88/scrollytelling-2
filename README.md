@@ -1,1 +1,2 @@
-# Scrollytelling-test
+# Scrollytelling
+Scrollytelling with Mapbox and Scrollama.js
